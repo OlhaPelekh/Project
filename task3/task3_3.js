@@ -1,5 +1,5 @@
 // 1 спосіб
-const number = 12345;
+const number = 10369;
 let strNumber = number.toString();
 let result1 = strNumber.split('').join(' ');
 console.log(result1);
