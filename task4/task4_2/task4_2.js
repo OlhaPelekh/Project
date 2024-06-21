@@ -1,5 +1,5 @@
 let number = prompt('Введіть тризначне число:');
-if (isNaN(number)) {
+if (isNaN(+number)) {
     alert('Будь ласка, введіть коректне число.');
 } else {
     let allSame = true;
