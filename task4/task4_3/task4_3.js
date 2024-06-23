@@ -1,23 +1,24 @@
 let yearOfBirth = prompt('Введіть свій рік народження:');
 let age;
-if(yearOfBirth===null){
+let strAge;
+if (yearOfBirth === null || yearOfBirth === '') {
     alert(`Шкода, що Ви не захотіли ввести свій рік народження.`);
-    age = '';
-}else if(isNaN(+yearOfBirth)){
+    strAge = '';
+} else if (isNaN(+yearOfBirth)) {
     alert(`Рік народження введено некоректно.`);
     age = '';
-}else{
+} else {
     let date = new Date();
     age = date.getFullYear() - yearOfBirth;
+    strAge = `Твій вік є ${age}.`;
 }
 
 let city = prompt('Введіть місто, в якому живете:');
 let strCity;
-if(city===null){
+if (city === null || city === '') {
     alert(`Шкода, що Ви не захотіли ввести своє місто.`);
-    strCity='';
-
-}else{
+    strCity = '';
+} else {
     let isCapital = false;
     switch (city) {
         case 'Київ':
@@ -33,18 +34,18 @@ if(city===null){
             isCapital;
     }
     if (isCapital) {
-        strCity = 'Ти живеш у столиці';
+        strCity = `Ти живеш у столиці ${city}.`;
     } else {
-        strCity = 'Ти живеш у місті';
+        strCity = `Ти живеш у місті ${city}.`;
     }
 }
 
 let favoriteSport = prompt('Введіть улюблений вид спорту:');
 let strChampion;
-if(favoriteSport===null){
+if (favoriteSport === null || favoriteSport === '') {
     alert(`Шкода, що Ви не захотіли ввести свій улюблений вид спорту.`);
     strChampion = '';
-}else{
+} else {
     let champion;
     switch (favoriteSport) {
         case 'Легка атлетика':
@@ -59,12 +60,17 @@ if(favoriteSport===null){
         default:
             champion = null;
     }
-    if (champion!=null) {
-        strChampion = 'Круто! Хочеш стати '+ champion + '!';
+    if (champion != null) {
+        strChampion = 'Круто! Хочеш стати ' + champion + '?';
     } else {
-        strChampion='';
+        strChampion = '';
     }
 }
 
-alert(`Твій вік є ${age}. ${strCity} ${city}. ${strChampion}`);
+if (strAge && strCity && strChampion !== null) {
+    alert(`${strAge} ${strCity} ${strChampion}`);
+} else {
+    alert(`Шкода, що Ви не захотіли ввести ніяких даних.`);
+}
+
 
