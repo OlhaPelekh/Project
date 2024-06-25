@@ -1,4 +1,4 @@
-let yearOfBirth = prompt('Введіть свій рік народження:');
+const yearOfBirth = prompt('Введіть свій рік народження:');
 let age;
 let strAge;
 if (yearOfBirth === null || yearOfBirth === '') {
@@ -13,7 +13,7 @@ if (yearOfBirth === null || yearOfBirth === '') {
     strAge = `Твій вік є ${age}.`;
 }
 
-let city = prompt('Введіть місто, в якому живете:');
+const city = prompt('Введіть місто, в якому живете:');
 let strCity;
 if (city === null || city === '') {
     alert(`Шкода, що Ви не захотіли ввести своє місто.`);
@@ -40,7 +40,7 @@ if (city === null || city === '') {
     }
 }
 
-let favoriteSport = prompt('Введіть улюблений вид спорту:');
+const favoriteSport = prompt('Введіть улюблений вид спорту:');
 let strChampion;
 if (favoriteSport === null || favoriteSport === '') {
     alert(`Шкода, що Ви не захотіли ввести свій улюблений вид спорту.`);
