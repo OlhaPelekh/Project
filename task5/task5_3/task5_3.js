@@ -1,12 +1,14 @@
 let n;
 do {
     n = prompt('Введіть ціле число: ', 10);
-    n=parseInt(n);
-} while (+isNaN(n) || !Number.isInteger(n));
+    n = parseInt(n);
+} while (isNaN(n) || !Number.isInteger(n));
 
 let res;
 let count = [];
-for (let i = 1; i < 100; i++) {
+const startValue = 1;
+const finishValue = 100;
+for (let i = startValue; i < finishValue; i++) {
     res = Math.pow(i, 2);
     if (res > n) {
         break;

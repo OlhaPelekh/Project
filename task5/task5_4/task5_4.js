@@ -6,7 +6,9 @@ do {
 
 let res;
 let count = 0;
-for (let i = 1; i <= n; i++) {
+const startValue = 1;
+const finishValue = n;
+for (let i = startValue; i <= finishValue; i++) {
     res = n % i;
     if (res === 0) {
         count++;
