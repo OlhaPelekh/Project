@@ -1,4 +1,4 @@
-let number = prompt('Введіть тризначне число:');
+const number = prompt('Введіть тризначне число:');
 if (isNaN(+number)) {
     alert('Будь ласка, введіть коректне число.');
 } else {
