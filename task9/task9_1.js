@@ -38,3 +38,9 @@ function salaryEmployees(company) {
 }
 
 console.log("Сума всіх зарплат користувачів:", salaryEmployees(company));
+
+// const massLength = Object.keys(department).length;
+// for (let i = 0; i < massLength; i++) {
+//   sum += company[i].salary;
+// }
+// return sum;
