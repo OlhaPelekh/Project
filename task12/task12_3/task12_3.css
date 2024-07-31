@@ -1,0 +1,32 @@
+.container {
+  max-width: 300px;
+  background-color: skyblue;
+  color: blue;
+  text-align: center;
+}
+
+h3{
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+input{
+  background: rgba(14, 176, 221, 0.797);
+  border: none;
+  margin-right: 20px; 
+}
+
+li{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+p{
+  margin-right: 40px; 
+}
+
+.completed {
+  text-decoration: line-through;
+}
