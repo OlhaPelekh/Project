@@ -9,16 +9,13 @@
 
 const nameInput = document.querySelector("#name");
 const nameSpan = document.querySelector("#nameInvalid");
-let formIsValid = false;
 
 nameInput.addEventListener("input", function (event) {
   const name = event.target.value;
   if (name.trim() !== "") {
     nameSpan.innerText = "";
-    formIsValid = true;
   } else {
     nameSpan.innerText = `Введіть своє ім'я.`;
-    formIsValid = false;
   }
 });
 
@@ -29,10 +26,8 @@ messageInput.addEventListener("input", function (event) {
   const message = event.target.value.trim();
   if (message.length >= 5) {
     messageSpan.innerText = "";
-    formIsValid = true;
   } else {
     messageSpan.innerText = "Повідомлення повинно бути не менше 5 символів.";
-    formIsValid = false;
   }
 });
 
@@ -44,11 +39,9 @@ phoneNumberInput.addEventListener("input", function (event) {
   const phoneRegex = /^\+380\d{9}$/;
   if (phoneRegex.test(phoneNumber)) {
     phoneNumberSpan.innerText = "";
-    formIsValid = true;
   } else {
     phoneNumberSpan.innerText =
       "Неправильно введений номер, введіть +380XXXXXXXXX";
-    formIsValid = false;
   }
 });
 
@@ -60,27 +53,57 @@ emailInput.addEventListener("input", function (event) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (emailRegex.test(email)) {
     emailSpan.innerText = "";
-    formIsValid = true;
   } else {
     emailSpan.innerText = "Неправильний формат email адреси.";
-    formIsValid = false;
   }
 });
 
+const allInput = document.querySelectorAll(".input");
+const allSpan = document.querySelectorAll("span");
+
+function formIsValid() {
+  let isValid = true;
+
+  allInput.forEach((element) => {
+    if (element.value.trim() === "") {
+      isValid = false;
+    }
+  });
+
+  allSpan.forEach((element) => {
+    if (element.innerText !== "") {
+      isValid = false;
+    }
+  });
+  return isValid;
+}
+
 const form = document.querySelector("#my-form");
-let mass = [];
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  const formData = new FormData(form);
+  if (formIsValid()) {
+    const formData = new FormData(form);
 
-  if (formIsValid) {
     formData.forEach((value, key) => {
       console.log(`${key}: ${value}`);
-      mass.push(` ${key}: ${value}`);
     });
+
+    const url = "https://example.com/api/submit";
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Помилка: " + error);
+      });
+    alert("Успішно");
+  } else {
+    alert("Bad");
   }
-  alert(mass);
 });
-
-
