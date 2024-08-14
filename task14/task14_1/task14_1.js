@@ -136,15 +136,13 @@ document.addEventListener('DOMContentLoaded', function () {
     if (index < architecture.length - 1) {
       index++;
       getSlider(index);
-    } else {
-    }
+    } 
   });
 
   arrowLeft.addEventListener('click', function () {
     if (index > 0) {
       index--;
       getSlider(index);
-    } else {
     }
   });
 
