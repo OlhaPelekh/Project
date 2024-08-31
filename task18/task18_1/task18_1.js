@@ -7,8 +7,13 @@ const divTimer = document.querySelector(".timer");
 let valueTimer;
 
 do {
-   valueTimer = prompt("Введіть секунди", 85);
-} while (isNaN(valueTimer) || valueTimer === null || valueTimer.trim() === "");
+  valueTimer = prompt("Введіть секунди", 85);
+} while (
+  isNaN(valueTimer) ||
+  valueTimer === null ||
+  valueTimer.trim() === "" ||
+  valueTimer < 0
+);
 
 function getTime() {
   let minutes = Math.floor(valueTimer / 60);
@@ -19,7 +24,7 @@ function getTime() {
 
   divTimer.textContent = `${minutes}:${seconds}`;
 
-  if (valueTimer <= 0) {
+  if (valueTimer === 0) {
     clearInterval(timer);
     divTimer.textContent = `00:00`;
   } else {
