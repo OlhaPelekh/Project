@@ -1,0 +1,36 @@
+{
+    "windDirections": [
+      { "direction": "N", "degrees": 0.00 },
+      { "direction": "NbE", "degrees": 11.25 },
+      { "direction": "NNE", "degrees": 22.50 },
+      { "direction": "NEbN", "degrees": 33.75 },
+      { "direction": "NE", "degrees": 45.00 },
+      { "direction": "NEbE", "degrees": 56.25 },
+      { "direction": "ENE", "degrees": 67.50 },
+      { "direction": "EbN", "degrees": 78.75 },
+      { "direction": "E", "degrees": 90.00 },
+      { "direction": "EbS", "degrees": 101.25 },
+      { "direction": "ESE", "degrees": 112.50 },
+      { "direction": "SEbE", "degrees": 123.75 },
+      { "direction": "SE", "degrees": 135.00 },
+      { "direction": "SEbS", "degrees": 146.25 },
+      { "direction": "SSE", "degrees": 157.50 },
+      { "direction": "SbE", "degrees": 168.75 },
+      { "direction": "S", "degrees": 180.00 },
+      { "direction": "SbW", "degrees": 191.25 },
+      { "direction": "SSW", "degrees": 202.50 },
+      { "direction": "SWbS", "degrees": 213.75 },
+      { "direction": "SW", "degrees": 225.00 },
+      { "direction": "SWbW", "degrees": 236.25 },
+      { "direction": "WSW", "degrees": 247.50 },
+      { "direction": "WbS", "degrees": 258.75 },
+      { "direction": "W", "degrees": 270.00 },
+      { "direction": "WbN", "degrees": 281.25 },
+      { "direction": "WNW", "degrees": 292.50 },
+      { "direction": "NWbW", "degrees": 303.75 },
+      { "direction": "NW", "degrees": 315.00 },
+      { "direction": "NWbN", "degrees": 326.25 },
+      { "direction": "NbW", "degrees": 348.75 }
+    ]
+  }
+  
