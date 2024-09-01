@@ -1,31 +1,21 @@
 // За допомогою запиту вивести виджет погоди. Ресурс API https://openweathermap.org/current
 // Також потрібно додати кнопку оновлення данних.
 
-let apiKey;
-const fs = require("fs");
-try {
-  const data = fs.readFileSync("apiKey.txt", "utf8");
-  apiKey = data.toString();
-} catch (err) {
-  console.error("Error:", err.stack);
-  return;
-}
+let apiKey = 'apiKey';
 
-const city = "Lviv";
+const cityBase = "Lviv";
+const city = prompt("Enter city: ", cityBase);
 const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
 let array = [];
-async function readData() {
-  try {
-    const data = await fs.readFileSync("data.json", "utf8");
-    array = JSON.parse(data);
-  } catch (err) {
-    console.error("Error reading file:", err);
-    return;
-  }
-}
-async function getWindDirection(degree) {
-  await readData();
+fetch("data.json")
+  .then((response) => response.json())
+  .then((data) => {
+    array = data;
+  })
+  .catch((error) => console.error("Error fetching JSON data:", error));
+
+function getWindDirection(degree) {
   let closestDirection = array.windDirections[0].direction;
   let smallestDifference = Math.abs(degree - array.windDirections[0].degrees);
 
@@ -84,6 +74,18 @@ function convertKelvinToCelsius(kelvin) {
   return `${celsius}°C`;
 }
 
+function getImage(hour) {
+  if (hour >= 0 && hour < 6) {
+    return "img/night.jpg";
+  } else if (hour < 12) {
+    return "img/morning.jpg";
+  } else if (hour < 18) {
+    return "img/day.jpg";
+  } else {
+    return "img/evening.jpg";
+  }
+}
+
 async function fetchData() {
   try {
     const response = await fetch(url);
@@ -92,64 +94,92 @@ async function fetchData() {
     }
     const data = await response.json();
 
-    const date = new Date(data.dt * 1000); // Перетворюємо Unix час у мілісекунди
+    const timezoneOffset = data.timezone;
+    const date = new Date((data.dt + timezoneOffset) * 1000);
 
-    const month = date.getUTCMonth();
-    console.log(getMonth(month));
+    const monthNumber = date.getMonth();
+    const month = getMonth(monthNumber);
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const dayWeekNumber = date.getDay();
+    const dayWeek = getDayWeek(dayWeekNumber);
+    const dateTimeWeather = document.querySelector(".weather__date-time");
+    dateTimeWeather.textContent = `${month} ${day}, ${year} - ${dayWeek}`;
 
-    const day = date.getUTCDate();
-    console.log(day);
+    const sunrise = new Date((data.sys.sunrise + timezoneOffset) * 1000);
+    const sunriseHours = sunrise.getUTCHours();
+    const sunriseMinutes = sunrise.getUTCMinutes();
+    const sunriseWeather = document.querySelector(".weather__sunrise");
+    sunriseWeather.textContent = `SUN ${changeTimeFormat(
+      sunriseHours,
+      sunriseMinutes
+    )}`;
 
-    const year = date.getUTCFullYear();
-    console.log(year);
-
-    const dayWeek = date.getUTCDay();
-    console.log(getDayWeek(dayWeek));
-
-    const sunrise = new Date(data.sys.sunrise * 1000);
-    const sunriseHours = sunrise.getHours();
-    const sunriseMinutes = sunrise.getMinutes();
-    console.log(`SUN ${changeTimeFormat(sunriseHours, sunriseMinutes)}`);
-
-    const currentHours = date.getHours();
-    const currentMinutes = date.getMinutes();
-    console.log(changeTimeFormat(currentHours, currentMinutes));
+    const currentHours = date.getUTCHours();
+    const currentMinutes = date.getUTCMinutes();
+    const currentTimeWeather = document.querySelector(".weather__current-time");
+    currentTimeWeather.textContent = changeTimeFormat(
+      currentHours,
+      currentMinutes
+    );
 
     const humidity = data.main.humidity;
-    console.log(`Humidity: ${humidity}%`);
+    const humidityWeather = document.querySelector(".weather__humidity");
+    humidityWeather.textContent = `Humidity: ${humidity}%`;
 
     const pressure = data.main.pressure;
-    console.log(`Pressure: ${pressure} hPa`);
+    const pressureWeather = document.querySelector(".weather__pressure");
+    pressureWeather.textContent = `Pressure: ${pressure} hPa`;
 
     const windDegree = data.wind.deg;
-    console.log(windDegree);
-
-    const windDirection = await getWindDirection(windDegree);
-    console.log(`Wind: ${data.wind.speed} km/h ${windDirection}`);
+    const windDirection = getWindDirection(windDegree);
+    const windWeather = document.querySelector(".weather__wind");
+    windWeather.textContent = `Wind: ${data.wind.speed} km/h ${windDirection}`;
 
     const temperature = data.main.temp;
-    console.log(convertKelvinToCelsius(temperature));
+    const temperatureWeather = document.querySelector(".weather__temperature");
+    temperatureWeather.textContent = convertKelvinToCelsius(temperature);
 
     const feelsLike = data.main.feels_like;
-    console.log(`Feels Like: ${convertKelvinToCelsius(feelsLike)}`);
+    const feelsLikeWeather = document.querySelector(".weather__feels-like");
+    feelsLikeWeather.textContent = `Feels Like: ${convertKelvinToCelsius(
+      feelsLike
+    )}`;
 
     const weatherDescription = data.weather[0].description;
-    console.log(weatherDescription);
+    const descriptionWeather = document.querySelector(".weather__description");
+    descriptionWeather.textContent = `${weatherDescription}`;
 
-    const sunset = new Date(data.sys.sunset * 1000);
+    const sunset = new Date((data.sys.sunset + timezoneOffset) * 1000);
     const sunsetMonth = sunset.getMonth();
     const sunsetDay = sunset.getDate();
-    const sunsetHours = sunset.getHours();
-    const sunsetMinutes = sunset.getMinutes();
-    console.log(
-      `${getMonth(sunsetMonth)} ${sunsetDay} ${changeTimeFormat(
-        sunsetHours,
-        sunsetMinutes
-      )}`
-    );
+    const sunsetHours = sunset.getUTCHours();
+    const sunsetMinutes = sunset.getUTCMinutes();
+    const sunsetWeather = document.querySelector(".weather__sunset");
+    sunsetWeather.textContent = `${getMonth(
+      sunsetMonth
+    )} ${sunsetDay} ${changeTimeFormat(sunsetHours, sunsetMinutes)}`;
+
+    const imageUrl = getImage(currentHours);
+    const weather = document.querySelector(".weather");
+    weather.style.backgroundImage = `url("${imageUrl}")`;
+
+    const buttonParent = document.querySelector(".weather__sunset");
+    const button = document.createElement("a");
+    button.className = "weather__refresh";
+    button.innerHTML = "&#10227";
+    button.href = "";
+    buttonParent.appendChild(button);
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      fetchData();
+    });
   } catch (error) {
     console.error("There has been a problem with your fetch operation:", error);
+    const weatherParent = document.querySelector('.weather');
+    weatherParent.textContent = 'Check the correctness of data!';
+    weatherParent.style.cssText = 'color:black;font-size: 30px';
   }
 }
 
-fetchData();
+document.addEventListener("DOMContentLoaded", fetchData);

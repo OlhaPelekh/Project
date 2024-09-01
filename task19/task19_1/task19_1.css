@@ -1,73 +1,77 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    line-height: 1.2;
-    font-size: 18px;
-    background-color: #66deb2;
+  background-color: rgba(208, 244, 254, 0.66);
 }
 
-h1, h2 {
-    text-align: center;
-    margin-bottom: 15px;
+.weather {
+  margin: 0 auto;
+  max-width: 80%;
+  display: flex;
+  justify-content: center;
+  background-image: url("img/day.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 350px;
+  color: white;
 }
 
-.container {
-    width: 100%;
-    margin: 0 auto;
-    max-width: 75%;
+.weather__left-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+}
+.weather__date-time {
+  font-size: 30px;
+}
+.weather__sunrise {
+  font-size: 20px;
+}
+.weather__current-time {
+  font-size: 50px;
+}
+.weather__humidity {
+  font-size: 20px;
+}
+.weather__pressure {
+  font-size: 20px;
+}
+.weather__wind {
+  font-size: 20px;
 }
 
-.form {
-    background: #fff;
-    padding: 10px;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    display: flex;
-    justify-content: center;
+.weather__right-container {
+  align-self: flex-end;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
 }
 
-.form__input {
-    min-height: 25px;
-    padding: 10px;
-    width: 100%;
-    border: 1px solid;
+.weather__temperature {
+  font-size: 30px;
 }
-
-.form__btn {
-    background: #0be69d;
-    border: none;
-    cursor: pointer;
-    width: 100px;
+.weather__feels-like {
+  font-size: 20px;
 }
-
-.todo-item {
-    display: flex;
-    padding: 10px;
-    background: #fff;
-    border-radius: 10px;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+.weather__description {
+  font-size: 30px;
+  text-transform: capitalize;
 }
-.todo-item--checked {
-    text-decoration: line-through;
+.weather__sunset {
+  font-size: 20px;
 }
-.todo-item__description {
-    flex-grow: 1;
-    padding-left: 10px;
-}
-.todo-item__delete {
-    background: #0be69d;
-    border: none;
-    cursor: pointer;
-    width: 95px;
-    padding: 10px;
-}
-
-.weatherDescription{
-    text-transform: capitalize;
+.weather__refresh {
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  padding-left: 5px;
 }
