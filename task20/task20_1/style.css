@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgba(208, 244, 254, 0.66);
+}
+
+.glide {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.glide__slide img {
+  width: 100%;
+  height: auto;
+}
+
+#map {
+  width: 80%;
+  height: 400px;
+  margin: 20px auto;
+}
